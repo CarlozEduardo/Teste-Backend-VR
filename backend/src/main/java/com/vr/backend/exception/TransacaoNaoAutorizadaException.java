@@ -2,8 +2,6 @@ package com.vr.backend.exception;
 
 import com.vr.backend.domain.model.MotivoErroTransacao;
 import lombok.Data;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Data
 public class TransacaoNaoAutorizadaException extends RuntimeException {

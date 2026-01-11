@@ -8,9 +8,7 @@ import com.vr.backend.exception.CartaoNaoEncontradoException;
 import com.vr.backend.repository.CartaoRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 import java.math.BigDecimal;
 
 @Service
@@ -21,11 +19,7 @@ public class CartaoService {
     private CartaoRepository repository;
 
     public CartaoDTO criar(CartaoDTO dto) {
-        repository.findByNumero(dto.getNumeroCartao())
-                .ifPresent(cartao -> {
-                    throw new CartaoJaExisteException(dto);
-                });
-
+        buscarCartao(dto.getNumeroCartao(), new CartaoJaExisteException(dto));
         repository.save(CartaoMapper.to(dto));
         return dto;
     }
@@ -34,5 +28,10 @@ public class CartaoService {
         Cartao cartao = repository.findByNumero(numeroCartao)
                 .orElseThrow(() -> new CartaoNaoEncontradoException());
         return cartao.getSaldo();
+    }
+
+    public Cartao buscarCartao(String numeroCartao, RuntimeException exception) {
+        return repository.findByNumero(numeroCartao)
+                .orElseThrow(() -> exception);
     }
 }

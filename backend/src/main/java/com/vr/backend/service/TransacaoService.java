@@ -20,15 +20,17 @@ public class TransacaoService {
     @Autowired
     private CartaoRepository repository;
 
+    @Autowired
+    private CartaoService cartaoService;
+
     @Transactional
     public void realizarTransacao(TransacaoDTO dto) {
 
-        Cartao cartao = repository.findByNumero(dto.getNumeroCartao())
-                .orElseThrow(() ->
-                        new TransacaoNaoAutorizadaException(
-                                MotivoErroTransacao.CARTAO_INEXISTENTE
-                        )
-                );
+        Cartao cartao = cartaoService.buscarCartao(
+                dto.getNumeroCartao(),
+                new TransacaoNaoAutorizadaException(
+                        MotivoErroTransacao.CARTAO_INEXISTENTE
+                ));
 
         validarSenha(cartao, dto.getSenhaCartao());
         validarSaldo(cartao, dto.getValor());
