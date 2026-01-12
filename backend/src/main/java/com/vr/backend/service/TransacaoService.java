@@ -6,7 +6,6 @@ import com.vr.backend.domain.model.dto.TransacaoDTO;
 import com.vr.backend.exception.TransacaoNaoAutorizadaException;
 import com.vr.backend.repository.CartaoRepository;
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +15,6 @@ import java.util.Optional;
 @Service
 @Transactional
 public class TransacaoService {
-
-    @Autowired
-    private CartaoRepository repository;
 
     @Autowired
     private CartaoService cartaoService;

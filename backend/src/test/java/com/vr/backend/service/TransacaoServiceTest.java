@@ -2,10 +2,8 @@ package com.vr.backend.service;
 
 import com.vr.backend.domain.entity.Cartao;
 import com.vr.backend.domain.model.MotivoErroTransacao;
-import com.vr.backend.domain.model.dto.CartaoDTO;
 import com.vr.backend.domain.model.dto.TransacaoDTO;
 import com.vr.backend.exception.TransacaoNaoAutorizadaException;
-import com.vr.backend.repository.CartaoRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,19 +11,14 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class TransacaoServiceTest {
-
-    @Mock
-    private CartaoRepository repository;
 
     @Mock
     private CartaoService cartaoService;
