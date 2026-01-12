@@ -73,3 +73,47 @@ O tratamento de erros foi centralizado usando @RestControllerAdvice, garantindo:
 A aplicação utiliza Spring Security com autenticação Basic Auth, protegendo todos os endpoints.
 
 ---
+
+## 🧩 Padrões de Projeto Utilizados
+
+---
+
+### 🔹 Service Layer Pattern
+A camada de serviço concentra toda a regra de negócio da aplicação, evitando lógica nos controllers e garantindo melhor separação de responsabilidades.
+
+Benefícios:
+- Centralização das regras de autorização
+- Facilidade para testes unitários
+- Código mais limpo e reutilizável
+
+---
+
+### 🔹 Repository Pattern
+O acesso a dados foi abstraído por meio de repositórios utilizando Spring Data JPA, desacoplando a lógica de negócio da persistência.
+
+Benefícios:
+- Menor acoplamento com a camada de dados
+- Facilidade de manutenção
+- Integração nativa com o Spring
+
+---
+
+### 🔹 DTO (Data Transfer Object)
+Foram utilizados DTOs para transferência de dados entre a API e o cliente, evitando a exposição direta das entidades do domínio.
+
+Benefícios:
+- Maior controle dos contratos da API
+- Redução do acoplamento entre camadas
+- Facilidade para evolução da aplicação
+
+---
+
+### 🔹 Exception Handler Pattern
+O tratamento de exceções foi centralizado por meio de um handler global utilizando `@RestControllerAdvice`, permitindo a criação de exceções personalizadas conforme as regras de negócio.
+
+Benefícios:
+- Padronização das respostas de erro
+- Centralização da lógica de tratamento de exceções
+- Código mais organizado e de fácil manutenção
+
+---
