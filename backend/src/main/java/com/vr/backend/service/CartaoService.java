@@ -19,7 +19,11 @@ public class CartaoService {
     private CartaoRepository repository;
 
     public CartaoDTO criar(CartaoDTO dto) {
-        buscarCartao(dto.getNumeroCartao(), new CartaoJaExisteException(dto));
+        repository.findByNumero(dto.getNumeroCartao())
+                .ifPresent(cartao -> {
+                    throw new CartaoJaExisteException(dto);
+                });
+
         repository.save(CartaoMapper.to(dto));
         return dto;
     }
